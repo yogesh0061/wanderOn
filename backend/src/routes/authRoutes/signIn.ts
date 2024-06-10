@@ -8,7 +8,7 @@ const router = Router();
 
 router.post("/", 
     [
-        body("email").isEmail().withMessage("Email must be valid"),
+        body("email").escape().isEmail().withMessage("Email must be valid"),
         body("password").trim().notEmpty().withMessage("You must enter a password")
     ],
     async (req: Request, res: Response) => {

@@ -11,7 +11,7 @@ export interface AuthState {
 const initialState: AuthState = {
   isLoggedin: false,
   name: null,
-  loading :false
+  loading :true
 }
   
 
@@ -71,6 +71,7 @@ export const verifyTokenThunk  = createAsyncThunk(
   "verifyToken",
   async ( thunkAPi) => {
     const response = await verifyToken();
+
     return response;
   }
 );

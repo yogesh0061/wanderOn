@@ -8,9 +8,9 @@ const router = express.Router();
 router.post(
   "/",
   [
-    // Validation rules for name, email, and password
-    body("name").trim().notEmpty().withMessage("name is required"),
-    body("email").isEmail().withMessage("Email must be valid"),
+    
+    body("name").escape().trim().notEmpty().withMessage("name is required"),
+    body("email").isEmail().normalizeEmail().withMessage("Email must be valid"),
     body("password").trim().notEmpty().withMessage("Password is required"),
   ],
   async (req: Request, res: Response) => {
