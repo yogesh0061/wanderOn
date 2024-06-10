@@ -44,7 +44,7 @@ This document provides a guide to the User Registration functionality implemente
 4. **Start the Server and Client**
     ```bash
     cd backend  && npm run dev
-    cd frontend  && npm start
+    cd frontend && npm start
 
 
 
