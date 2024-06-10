@@ -32,10 +32,10 @@ router.post("/",
             if (!checkPassword) {
                 return res.status(401).send("Invalid Credentials");
             }
-            const token = Token.createToken(email) 
+            const token = Token.createToken({name: user.name, email}) 
             const data = {
                 name: user.name,
-                email,
+                isLoggedin : true
                 
             };
             res.cookie('authToken', token, {

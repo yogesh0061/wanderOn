@@ -4,19 +4,37 @@ import React, { useState } from 'react';
 import { Avatar, Button,  TextField, Paper, Box,  Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { signupApi } from '../slices/authApi';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 function SignupPage() {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate()
 
-  const handleSubmit  = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit  = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle signup logic here
-    console.log('Username:', username);
+    
+    try {
+      if(password === confirmPassword){
+        const response = await signupApi({name, email, password})
+        const data = await response.json;
+        console.log(data)
+        if(response === "User created successfully"){
+          navigate("/");
+        }
+      
+      }
+    } catch (error) {
+      console.log(error)
+      
+    }
+    
+    console.log('name:', name);
     console.log('Email:', email);
     console.log('Password:', password);
     console.log('Confirm Password:', confirmPassword);
@@ -45,13 +63,13 @@ function SignupPage() {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="name"
+              label="name"
+              name="name"
+              autoComplete="name"
               autoFocus
-              value={username}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+              value={name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             />
             <TextField
               margin="normal"

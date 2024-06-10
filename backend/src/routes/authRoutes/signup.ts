@@ -31,15 +31,16 @@ router.post(
       if (user) {
         return res.status(400).send("Email is already registered");
       }
+      const hashed = await Password.toHash(password);
 
       const newUser = new User({
         name,
         email,
-        password: await Password.toHash(password),
+        password: hashed  
       });
 
       await newUser.save();
-      return res.send("User created successfully");
+      return res.status(200).send("User created successfully");
     } catch (error) {
       console.error("Error:", error);
       return res.status(500).send("Server Error");

@@ -4,19 +4,33 @@ import React, { useState } from 'react';
 import { Avatar, Button, TextField, Paper, Box, Typography, Container, Stack } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../state/store';
+import { loginThunk } from '../slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme = createTheme();
 
 function LoginPage() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
+
  
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle login logic here
-    console.log('Username:', username);
+    
+    dispatch(loginThunk({email, password})).unwrap().then(()=>{
+      navigate("/Welcome")
+    }).catch(()=>{})
+    
+      
+    
+
+    console.log('email:', email);
     console.log('Password:', password);
   };
 
@@ -43,13 +57,13 @@ function LoginPage() {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="email"
+              label="email"
+              name="email"
+              autoComplete="email"
               autoFocus
-              value={username}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
