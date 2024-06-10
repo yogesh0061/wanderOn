@@ -30,5 +30,11 @@ export const verifyToken = async () => {
   return response.data;
 };
 
+export const logout = async () => {
+  const response = await apiClient.get("api/auth/logout");
+  return response.data;
+};
+
+
 
 
