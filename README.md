@@ -39,12 +39,21 @@ This document provides a guide to the User Registration functionality implemente
    cd frontend  && npm install
 3. **Environment Variables**
   - Create a .env file in the backend directory with the following variables
+    ```bash
     MONGO_CONNECTION_STRING=
     JWT_SECRET_KEY=
 4. **Start the Server and Client**
     ```bash
     cd backend  && npm run dev
     cd frontend && npm start
+
+## Screenshots
+
+Here are some screenshots of the project:
+
+![Screenshot 1](https://github.com/yogesh0061/wanderOn/blob/master/images/signin.png)
+![Screenshot 2](https://github.com/yogesh0061/wanderOn/blob/master/images/signup.png)
+
 
 
 
